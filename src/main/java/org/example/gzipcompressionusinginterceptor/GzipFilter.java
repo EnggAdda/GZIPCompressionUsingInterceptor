@@ -20,6 +20,7 @@ public class GzipFilter implements Filter {
         String acceptEncoding = httpRequest.getHeader("Accept-Encoding");
 
         if (acceptEncoding != null && acceptEncoding.contains("gzip")) {
+            httpResponse.setHeader("Content-Encoding", "gzip");
             GzipHttpServletResponseWrapper gzipResponse = new GzipHttpServletResponseWrapper(httpResponse);
             chain.doFilter(request, gzipResponse);
             gzipResponse.flushBuffer();

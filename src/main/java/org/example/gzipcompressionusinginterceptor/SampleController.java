@@ -1,9 +1,12 @@
 package org.example.gzipcompressionusinginterceptor;
 
+import jakarta.annotation.PostConstruct;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -22,6 +25,16 @@ public class SampleController {
   HttpHeaders  headers = new HttpHeaders();
   headers.add("abc","def");
         return ResponseEntity.status(HttpStatus.OK).headers(headers).body(Map.of("data",map));
+
+    }
+
+    @PostMapping("/compressedData")
+    public ResponseEntity<Map<String,Object>> postData(@RequestBody Map<String,Object> requestBody){
+      Map<String,Object> originalRequestBody = requestBody;
+        System.out.println("originalRequestBody"+originalRequestBody);
+        HttpHeaders  headers = new HttpHeaders();
+        headers.add("abc","def");
+        return ResponseEntity.status(HttpStatus.OK).headers(headers).body(Map.of("data",originalRequestBody));
 
     }
 }

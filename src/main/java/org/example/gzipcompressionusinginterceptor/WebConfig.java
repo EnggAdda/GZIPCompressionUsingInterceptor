@@ -17,4 +17,11 @@ public class WebConfig {
         registrationBean.addUrlPatterns("/*");
         return registrationBean;
     }
+    @Bean
+    public FilterRegistrationBean<GzipRequestFilter> gzipRequestFilter() {
+        FilterRegistrationBean<GzipRequestFilter> registrationBean = new FilterRegistrationBean<>();
+        registrationBean.setFilter(new GzipRequestFilter());
+        registrationBean.addUrlPatterns("/*"); // Adjust this pattern to match your endpoints
+        return registrationBean;
+    }
 }
